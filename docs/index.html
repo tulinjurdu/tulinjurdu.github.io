@@ -3,26 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STUDENT PROGRESS REPORT - ACADEMIC YEAR 2023-24</title>
+<title>Search Student Record</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="manifest" href="images/site.webmanifest">
 </head>
 <body>
     <div class="d-flex flex-column min-vh-100">
-        <img src="images/final1.jpg" style="height: 150px;" class="img-fluid" alt="Banner Image">
+        <img src="images/school_banner.jpg" style="height: 150px;" class="img-fluid" alt="Banner Image">
    
         <div class="container flex-grow-1 py-4 text-center">
             <p class="text-center lead">STUDENT PROGRESS REPORT - ACADEMIC YEAR 2023-24</p>
-            <label for="inputRollNumber">Roll Number</label>&nbsp;
-            <input type="number" id="inputRollNumber">&nbsp;&nbsp;
-            <button onclick="showResult()" class="btn btn-primary">Show Result</button>
-            <br/>
-            <br/>
+            <div class="container text-center">
+                <label for="inputRollNumber" class="mb-3">Roll Number</label>&nbsp;
+                <input type="number" id="inputRollNumber" class="mb-3">&nbsp;&nbsp;
+                <button onclick="showResult()" class="btn btn-primary mb-3">Show Result</button>
+            </div>
 
             <div class="container text-center">
                 <div class="row">
                   <div class="col">
                   </div>
-                  <div class="col-8">
+                  <div class="col-10">
                     <div id="resultContainer" class="d-flex justify-content-center"></div>
                   </div>
                   <div class="col">
