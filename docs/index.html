@@ -19,7 +19,8 @@
             <div class="container text-center">
                 <label for="inputRollNumber" class="mb-3">Roll Number</label>&nbsp;
                 <input type="number" id="inputRollNumber" class="mb-3">&nbsp;&nbsp;
-                <button onclick="showResult()" class="btn btn-primary mb-3">Show Result</button>
+                <button onclick="showResult()" class="btn btn-primary mb-3" id="btnShowResult">Show Result</button>&nbsp;&nbsp;
+                <button onclick="reset()" class="btn btn-primary mb-3">Clear</button>
             </div>
 
             <div class="container text-center">
@@ -45,6 +46,19 @@
         const d = new Date();
         let year = d.getFullYear();
         document.getElementById("year").innerHTML = year;
+        
+        var inputRollNumber = document.getElementById("inputRollNumber");
+        inputRollNumber.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("btnShowResult").click();
+        }
+        });
+
+        function reset() {
+            document.getElementById("inputRollNumber").value = "";
+            document.getElementById("resultContainer").innerHTML = "";
+        }
     </script>
 </body>
 </html>
