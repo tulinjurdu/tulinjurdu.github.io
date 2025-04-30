@@ -82,7 +82,7 @@
 
                     if (student) {
 
-                        const photoPath = `images/photos/${student["Roll No"]}.jpeg`;
+                        const photoPath = `images/photos/${rollNumber}.jpeg`;
 
                         let resultHTML = `
                             <div class="result-card text-center">
@@ -106,7 +106,7 @@
                                         <tr><td>Social Science</td><td>${student["Social Science"]}</td></tr>
                                         <tr><td>Art</td><td>${student.Art}</td></tr>
                                         <tr class="table-active"><th>Total Score</th><td>${student.Total}</td></tr>
-                                        <tr class="table-active"><th>Remarks</th><td>${student.Remarks}</td></tr>
+                                        <tr class="table-active"><th>Remarks</th><td>${student.Remark}</td></tr>
                                     </tbody>
                                 </table>
                             </div>`;
