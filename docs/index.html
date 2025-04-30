@@ -133,12 +133,11 @@
                     <tr class="table-active"><th>Total Score</th><td>${student.Total}/360</td></tr>
                     <tr class="table-active"><th>Percentage</th><td>${student.Percentage}%</td></tr>
                     <tr class="table-active"><th>Remarks</th><td>${student.Remark}</td></tr>
-                    <tr><td><img src="images/Sign.jpg" alt="Signature" style="max-height: 60px;" onerror="this.style.display='none';" /></td></tr>
+                    <tr><td colspan="2"><img src="images/Sign.jpg" alt="Signature" style="max-height: 60px;" onerror="this.style.display='none';" /></td></tr>
                   </tbody>
                 </table>
 
-                <button class="btn btn-outline-success mt-3" onclick="window.print()">🖨 Print</button>
-                <button class="btn btn-outline-danger mt-3" onclick="downloadPDF()">⬇ Download PDF</button>
+                <button class="btn btn-outline-success mt-3" onclick="downloadPDF()">⬇ Download PDF</button>
               </div>
             `;
 
