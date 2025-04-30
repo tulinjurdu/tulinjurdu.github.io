@@ -1,149 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Z.P. Urdu School Tulinj</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <link rel="manifest" href="images/site.webmanifest">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
-        .result-card {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 70%;
-            max-width: 700px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Z.P. Urdu School Tulinj</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
+  <link rel="manifest" href="images/site.webmanifest" />
+  <style>
+    .result-card {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 70%;
+      max-width: 700px;
+    }
+  </style>
 </head>
 <body>
-    <div class="d-flex flex-column min-vh-100">
-        <img src="images/school_banner.jpg" style="height: 150px;" class="img-fluid" alt="Banner Image">
+  <div class="d-flex flex-column min-vh-100">
+    <img src="images/school_banner.jpg" style="height: 150px;" class="img-fluid" alt="Banner Image" />
+    
+    <div class="container flex-grow-1 py-4 text-center">
+      <p class="text-center font-weight-bold">
+        STUDENT PROGRESS REPORT FINAL EXAM 2024-25
+      </p>
+      <div class="container text-center">
+        <label for="inputRollNumber" class="mb-3">Roll Number</label>&nbsp;
+        <input type="text" min="1" id="inputRollNumber" class="mb-3" placeholder="Enter Roll Number" />&nbsp;&nbsp;
+        <button onclick="showResult()" class="btn btn-primary mb-2" id="btnShowResult">Show Result</button>&nbsp;&nbsp;
+        <button onclick="reset()" class="btn btn-secondary mb-2">Clear</button>
+      </div>
 
-        <div class="container flex-grow-1 py-4 text-center">
-            <p class="text-center font-weight-bold">STUDENT PROGRESS REPORT FINAL EXAM 2024-25</p>
-            <div class="container text-center">
-                <label for="inputRollNumber" class="mb-3">Roll Number</label>&nbsp;
-                <input type="text" min="1" id="inputRollNumber" class="mb-3" placeholder="Enter Roll Number">&nbsp;&nbsp;
-                <button onclick="showResult()" class="btn btn-primary mb-2" id="btnShowResult">Show Result</button>&nbsp;&nbsp;
-                <button onclick="reset()" class="btn btn-primary mb-2">Clear</button>
-            </div>
-
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col"></div>
-                    <div class="col-10">
-                        <div id="resultContainer" class="d-flex justify-content-center"></div>
-                        <div id="downloadBtnContainer" class="mt-3"></div>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </div>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-10">
+            <div id="resultContainer" class="d-flex justify-content-center" aria-live="polite"></div>
+          </div>
+          <div class="col"></div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <footer class="footer mt-auto py-3 bg-light text-center text-muted">
-        <small>
-            Copyright © <span id="year"></span> &nbsp; Z.P. Urdu School Tulinj. All rights reserved.
-        </small>
-    </footer>
+  <footer class="footer mt-auto py-3 bg-light text-center text-muted">
+    <small>
+      Copyright © <span id="year"></span>
+      &nbsp; Z.P. Urdu School Tulinj. All rights reserved.
+    </small>
+  </footer>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Set current year in footer
-        document.getElementById("year").textContent = new Date().getFullYear();
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-        // Handle Enter key
-        document.getElementById("inputRollNumber").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                document.getElementById("btnShowResult").click();
-            }
+    // Handle Enter key to trigger Show Result
+    document.getElementById("inputRollNumber").addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("btnShowResult").click();
+      }
+    });
+
+    // Show Result
+    function showResult() {
+      const rollNumber = document.getElementById("inputRollNumber").value.trim();
+      const resultContainer = document.getElementById("resultContainer");
+
+      if (!rollNumber) {
+        resultContainer.innerHTML = `<div class="alert alert-warning" role="alert">Please enter a roll number.</div>`;
+        return;
+      }
+
+      fetch("data/students_result.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const student = data.find(
+            (student) => student["Roll No"].toString().toLowerCase() === rollNumber.toLowerCase()
+          );
+
+          if (student) {
+            const photoPath = `images/photos/${rollNumber}.jpeg`;
+
+            let resultHTML = `
+              <div class="result-card text-center">
+                <img src="${photoPath}" alt="Student Photo" class="img-fluid rounded-circle mb-3"
+                     style="width: 125px; height: 125px;" onerror="this.onerror=null; this.src='images/default.jpg';">
+                <h4>${student.Name}</h4>
+                <p>Roll Number: ${student["Roll No"]}</p>
+
+                <table class="table table-bordered">
+                  <thead class="thead-light">
+                    <tr class="table-active">
+                      <th>Subject</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Urdu</td><td>${student.Urdu}</td></tr>
+                    <tr><td>English</td><td>${student.English}</td></tr>
+                    <tr><td>Hindi/Marathi</td><td>${student["Hindi/Marathi"]}</td></tr>
+                    <tr><td>Maths</td><td>${student.Maths}</td></tr>
+                    <tr><td>Science</td><td>${student.Science}</td></tr>
+                    <tr><td>Social Science</td><td>${student["Social Science"]}</td></tr>
+                    <tr><td>Art</td><td>${student.Art}</td></tr>
+                    <tr><td>Work Experience</td><td>${student["Work Exper."]}</td></tr>
+                    <tr><td>Physical Education</td><td>${student.Physical}</td></tr>
+                    <tr class="table-active"><th>Total Score</th><td>${student.Total}</td></tr>
+                    <tr class="table-active"><th>Percentage</th><td>${student.Percentage}%</td></tr>
+                    <tr class="table-active"><th>Remarks</th><td>${student.Remark}</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            `;
+
+            resultContainer.innerHTML = resultHTML;
+          } else {
+            resultContainer.innerHTML = `<div class="alert alert-danger" role="alert">Student not found. Please check the roll number.</div>`;
+          }
+        })
+        .catch((error) => {
+          resultContainer.innerHTML = `<div class="alert alert-danger" role="alert">Error fetching data. Please try again later.</div>`;
         });
+    }
 
-        // Show result
-        function showResult() {
-            const rollNumber = document.getElementById("inputRollNumber").value.trim();
-
-            fetch('data/students_result.json')
-                .then(response => response.json())
-                .then(data => {
-                    const student = data.find(student => student["Roll No"] === rollNumber);
-                    const resultContainer = document.getElementById('resultContainer');
-                    const downloadBtnContainer = document.getElementById('downloadBtnContainer');
-
-                    if (student) {
-                        const photoPath = `images/photos/${rollNumber}.jpeg`;
-                        let resultHTML = `
-                            <div class="result-card text-center">
-                                <img src="${photoPath}" alt="Student Photo" class="img-fluid rounded-circle rounded-photo mb-3" style="width: 125px; height: 125px;">
-                                <h4>${student.Name}</h4>
-                                <p>Roll Number: ${student["Roll No"]}</p>
-                                <table class="table table-bordered">
-                                    <thead class="thead-light">
-                                        <tr class="table-active">
-                                            <th>Subject</th>
-                                            <th>Score</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>Urdu</td><td>${student.Urdu}</td></tr>
-                                        <tr><td>English</td><td>${student.English}</td></tr>
-                                        <tr><td>Hindi/Marathi</td><td>${student["Hindi/Marathi"]}</td></tr>
-                                        <tr><td>Maths</td><td>${student.Maths}</td></tr>
-                                        <tr><td>Science</td><td>${student.Science}</td></tr>
-                                        <tr><td>Social Science</td><td>${student["Social Science"]}</td></tr>
-                                        <tr><td>Art</td><td>${student.Art}</td></tr>
-                                        <tr class="table-active"><th>Total Score</th><td>${student.Total}</td></tr>
-                                        <tr class="table-active"><th>Remarks</th><td>${student.Remark}</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        `;
-                        resultContainer.innerHTML = resultHTML;
-
-                        // Show Download PDF button
-                        downloadBtnContainer.innerHTML = `
-                            <button class="btn btn-success" onclick="downloadPDF()">Download PDF</button>
-                        `;
-                    } else {
-                        resultContainer.innerHTML = "<p class='text-danger'>Student not found. Please check the roll number.</p>";
-                        downloadBtnContainer.innerHTML = "";
-                    }
-                })
-                .catch(error => {
-                    document.getElementById("resultContainer").innerHTML = "<p class='text-danger'>Error fetching data. Please try again later.</p>";
-                    document.getElementById("downloadBtnContainer").innerHTML = "";
-                });
-        }
-
-        // Download as PDF
-        function downloadPDF() {
-            const element = document.querySelector('.result-card');
-            const opt = {
-                margin:       0.5,
-                filename:     'Student_Result.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-
-            html2pdf().set(opt).from(element).save();
-        }
-
-        // Reset input and result
-        function reset() {
-            document.getElementById("inputRollNumber").value = "";
-            document.getElementById("resultContainer").innerHTML = "";
-            document.getElementById("downloadBtnContainer").innerHTML = "";
-        }
-    </script>
+    // Clear input and result
+    function reset() {
+      document.getElementById("inputRollNumber").value = "";
+      document.getElementById("resultContainer").innerHTML = "";
+    }
+  </script>
 </body>
 </html>
