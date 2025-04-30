@@ -5,7 +5,7 @@ function showResult() {
     fetch('data/students_result.json')
         .then(response => response.json())
         .then(data => {
-            const student = data.find(student => student.RollNo === parseInt(rollNumber));
+            const student = data.find(student => student.RollNo === rollNumber);
 
             const resultContainer = document.getElementById('resultContainer');
 
