@@ -25,10 +25,10 @@
       body * {
         visibility: hidden;
       }
-      .result-card, .result-card * {
+      .page-content, .page-content * {
         visibility: visible;
       }
-      .result-card {
+      .page-content {
         position: absolute;
         left: 0;
         top: 0;
@@ -41,7 +41,7 @@
   <div class="d-flex flex-column min-vh-100">
     <img src="images/school_banner.jpg" style="height: 150px;" class="img-fluid" alt="Banner Image" />
     
-    <div class="container flex-grow-1 py-4 text-center">
+    <div class="container flex-grow-1 py-4 text-center page-content">
       <p class="text-center font-weight-bold">
         STUDENT PROGRESS REPORT FINAL EXAM 2024-25
       </p>
@@ -160,15 +160,15 @@
 
     // Download PDF
     function downloadPDF() {
-      const resultCard = document.querySelector(".result-card");
+      const pageContent = document.querySelector(".page-content");
 
-      if (!resultCard) {
+      if (!pageContent) {
         alert("Please generate a result first.");
         return;
       }
 
       import('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js').then(() => {
-        html2canvas(resultCard).then(canvas => {
+        html2canvas(pageContent).then(canvas => {
           const { jsPDF } = window.jspdf;
           const imgData = canvas.toDataURL("image/jpeg");
           const pdf = new jsPDF({
