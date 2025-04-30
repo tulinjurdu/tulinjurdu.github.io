@@ -73,7 +73,7 @@
         function showResult() {
     const rollNumber = document.getElementById("inputRollNumber").value.trim();
 
-    fetch('data/students_result_11_2024.json')
+    fetch('data/students_result.json')
                 .then(response => response.json())
                 .then(data => {
                     const student = data.find(student => student.RollNo == rollNumber);
