@@ -76,7 +76,7 @@
     fetch('data/students_result.json')
                 .then(response => response.json())
                 .then(data => {
-                    const student = data.find(student => student.RollNo == rollNumber);
+                    const student = data.find(student => student["Roll No"] == rollNumber);
 
                     const resultContainer = document.getElementById('resultContainer');
 
@@ -88,7 +88,7 @@
                             <div class="result-card text-center">
                                 <img src="${photoPath}" alt="Student Photo" class="img-fluid rounded-circle rounded-photo mb-3" style="width: 125px; height: 125px;">
                                 <h4>${student.Name}</h4>
-                                <p>Roll Number: ${student.RollNo}</p>
+                                <p>Roll Number: ${student["Roll No"]}</p>
 
                                 <table class="table table-bordered">
                                     <thead class="thead-light" >
