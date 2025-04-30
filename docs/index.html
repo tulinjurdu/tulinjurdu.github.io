@@ -76,7 +76,7 @@
     fetch('data/students_result.json')
                 .then(response => response.json())
                 .then(data => {
-                    const student = data.find(student => student["Roll No"] == rollNumber);
+                    const student = data.find(student => student["Roll No"] === rollNumber);
 
                     const resultContainer = document.getElementById('resultContainer');
 
