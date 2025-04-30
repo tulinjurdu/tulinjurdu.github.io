@@ -12,28 +12,29 @@ function showResult() {
             if (student) {
                 const table = `
                     <table class="table table-bordered">
-                    <tr class="text-start">
-                        <th>Name</th>
-                        <td>${student.Name}</td>
-                    </tr>
-                    <tr class="text-start">
-                    <th>Roll Number</th>
-                    <td>${student.RollNo}</td>
-                    </tr>
-                    <tr class="text-start">
-                        <th>Marks Obtained</th>
-                        <td>${student.Total}/900</td>
-                    </tr>
-                    <tr class="text-start">
-                        <th>Percentage</th>
-                        <td>${student.Percentage}&nbsp;%</td>
-                    </tr>
-                    <tr class="text-start">
-                        <th>Grade</th>
-                        <td>${student.Grade}</td>
-                    </tr>
-                </table>
+                        <tr class="text-start">
+                            <th>Name</th>
+                            <td>${student.Name}</td>
+                        </tr>
+                        <tr class="text-start">
+                            <th>Roll Number</th>
+                            <td>${student["Roll No"]}</td>
+                        </tr>
+                        <tr class="text-start">
+                            <th>Marks Obtained</th>
+                            <td>${student.Total}/900</td>
+                        </tr>
+                        <tr class="text-start">
+                            <th>Percentage</th>
+                            <td>${student.Percentage}&nbsp;%</td>
+                        </tr>
+                        <tr class="text-start">
+                            <th>Remark</th>
+                            <td>${student.Remark}</td>
+                        </tr>
+                    </table>
                 `;
+
                 resultContainer.innerHTML = table;
             } else {
                 resultContainer.innerHTML = 'Incorrect Roll Number!';
