@@ -100,11 +100,11 @@
         .then((response) => response.json())
         .then((data) => {
           const student = data.find(
-            (student) => student["Roll No"].toString().toLowerCase() === rollNumber.toLowerCase()
+            (student) => student["Roll No"].toString().toUpperCase() === rollNumber.toUpperCase()
           );
 
           if (student) {
-            const photoPath = `images/photos/${rollNumber}.jpeg`;
+            const photoPath = `images/photos/${rollNumber.toUpperCase()}.jpeg`;
 
             let resultHTML = `
               <div class="result-card text-center">
@@ -130,7 +130,7 @@
                     <tr><td>Art</td><td>${student.Art}</td></tr>
                     <tr><td>Work Experience</td><td>${student["Work Exper."]}</td></tr>
                     <tr><td>Physical Education</td><td>${student.Physical}</td></tr>
-                    <tr class="table-active"><th>Total Score</th><td>${student.Total}</td></tr>
+                    <tr class="table-active"><th>Total Score</th><td>${student.Total}/360</td></tr>
                     <tr class="table-active"><th>Percentage</th><td>${student.Percentage}%</td></tr>
                     <tr class="table-active"><th>Remarks</th><td>${student.Remark}</td></tr>
                   </tbody>
