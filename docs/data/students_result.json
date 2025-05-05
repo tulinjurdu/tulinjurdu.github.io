@@ -1362,16 +1362,13 @@
   {
     "Roll No": "B842",
     "Name": "IRZA MAHEROZ SHAIKH RAUF",
-    "Urdu": 57,
-    "English": 57,
-    "Hindi/Marathi": 56,
-    "Maths": 58,
-    "Science": 59,
-    "Social Science": 59,
-    "Art": "A1",
-    "Work Exper.": "A1",
-    "Physical": "A1",
-    "Total": 346,
+    "SEAT NO": V018348,
+    "English": 65,
+    "Hindi": 70,
+    "Maths": 68,
+    "PHYSICS": 70,
+    "CHEMISTRY": 59,
+    "BIOLOGY": "70",
     "Percentage": 96.11,
     "Remark": "Pass"
   }
